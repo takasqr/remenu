@@ -1,0 +1,52 @@
+<template>
+  <v-text-field
+    outlined
+    v-model="password"
+    :rules="passwordRules"
+    :label="this.$t('message.input_password')"
+    :type="show ? 'text' : 'password'"
+    required
+    :value="password"
+    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+    @change="sendData"
+    @click:append="show = !show"
+  >
+  </v-text-field>
+</template>
+
+<script>
+export default {
+  model: {
+    prop: 'passwordProp',
+    event: 'inputField'
+  },
+  props: {
+    passwordProp: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      password: this.passwordProp,
+      passwordRules: [
+        v => !!v || this.$t('message.input_error_require'),
+        v => (v && v.length <= 100) || this.$t('message.input_error_count', { num: '100' })
+      ],
+      show: false
+    }
+  },
+  methods: {
+    sendData: function (e) {
+      this.$emit('inputField', e)
+    }
+  },
+  watch: {
+    passwordProp: {
+      handler: function (newValue) {
+        this.password = newValue
+      }
+    }
+  }
+}
+</script>
