@@ -14,8 +14,8 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-import InputEmailAddress from '@/components/basic/account/InputEmailAddress.vue'
-import InputPassword from '@/components/basic/account/InputPassword.vue'
+import InputEmailAddress from '@/components/basic/input/InputEmailAddress.vue'
+import InputPassword from '@/components/basic/input/InputPassword.vue'
 
 export default {
   data () {
