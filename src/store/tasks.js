@@ -60,6 +60,6 @@ export default {
     },
     COMPLETE_TASK ({ commit }, value) {
       commit('completeTask', value)
-    },
+    }
   }
 }

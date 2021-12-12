@@ -4,13 +4,13 @@ export default {
     user: null,
   },
   mutations: {
-    user (state, value) {
+    setUser (state, value) {
       state.user = value
     }
   },
   actions: {
-    USER ({ commit }, value) {
-      commit('user', value)
+    SET_USER ({ commit }, value) {
+      commit('setUser', value)
     }
   }
 }
