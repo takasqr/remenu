@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -33,6 +34,11 @@ export default {
         v => (v && v.length <= 50) || '50文字以内で入力してください。'
       ]
     }
+  },
+  computed: {
+    ...mapState('user',
+      { user: state => state.user }
+    )
   },
   methods: {
     addTask (e) {
