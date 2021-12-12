@@ -6,11 +6,11 @@
           ref="form"
           v-model="valid"
           lazy-validation
-          @submit="addTask"
+          @submit="createTask"
         >
           <v-text-field
-            v-model="inputTask"
-            :rules="inputTaskRules"
+            v-model="taskName"
+            :rules="taskNameRules"
             :label="this.$t('message.input_new_task')"
             required
             validate-on-blur
@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      inputTask: null,
+      taskName: null,
       valid: true,
-      inputTaskRules: [
+      taskNameRules: [
         v => !!v || this.$t('message.input_error_require'),
         v => (v && v.length <= 50) || '50文字以内で入力してください。'
       ]
@@ -41,8 +41,14 @@ export default {
     )
   },
   methods: {
-    addTask (e) {
+    ...mapActions('tasks', ['CREATE_TASK']),
+    createTask (e) {
       e.preventDefault()
+
+      this.CREATE_TASK({ name: this.taskName, completed: false })
+
+      // 入力をクリア
+      this.taskName = null
     }
   }
 }
