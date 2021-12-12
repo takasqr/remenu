@@ -28,8 +28,23 @@ export default {
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
-            state.tasks.push(doc.data())
+            let task = doc.data()
+            // idを追加
+            task.id = doc.id
+            state.tasks.push(task)
           })
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    completeTask (state, id) {
+      console.log(id)
+      firebase.firestore().collection('tasks').doc(id)
+        .update({ completed: true })
+        .then(() => {
+          const index = state.tasks.findIndex(el => el.id === id)
+          state.tasks.splice(index, 1)
         })
         .catch(error => {
           console.error(error)
@@ -42,6 +57,9 @@ export default {
     },
     FETCH_TASKS ({ commit }, value) {
       commit('fetchTasks', value)
-    }
+    },
+    COMPLETE_TASK ({ commit }, value) {
+      commit('completeTask', value)
+    },
   }
 }
