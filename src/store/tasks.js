@@ -13,13 +13,13 @@ export default {
     ],
   },
   mutations: {
-    tasks (state, value) {
-      state.tasks.push(value)
+    createTask (state, value) {
+      state.tasks.unshift(value)
     }
   },
   actions: {
     CREATE_TASK ({ commit }, value) {
-      commit('tasks', value)
+      commit('createTask', value)
     }
   }
 }
