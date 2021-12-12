@@ -14,11 +14,11 @@ export default {
   },
   mutations: {
     tasks (state, value) {
-      state.tasks = value
+      state.tasks.push(value)
     }
   },
   actions: {
-    USER ({ commit }, value) {
+    CREATE_TASK ({ commit }, value) {
       commit('tasks', value)
     }
   }
