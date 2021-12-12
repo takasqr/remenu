@@ -45,7 +45,7 @@ export default {
     createTask (e) {
       e.preventDefault()
 
-      this.CREATE_TASK({ name: this.taskName, completed: false })
+      this.CREATE_TASK({ uid: this.user.uid ,name: this.taskName, completed: false })
 
       // 入力をクリア
       this.taskName = null

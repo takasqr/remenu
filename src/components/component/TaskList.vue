@@ -10,7 +10,7 @@
 
 <script>
 import TaskCard from '@/components/component/TaskCard.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -19,7 +19,20 @@ export default {
   computed: {
     ...mapState('tasks',
       { tasks: state => state.tasks }
+    ),
+    ...mapState('user',
+      { user: state => state.user }
     )
+  },
+  methods: {
+    ...mapActions('tasks', ['FETCH_TASKS'])
+  },
+  watch: {
+    user (newValue, oldValue) {
+      if (newValue && !oldValue) {
+        this.FETCH_TASKS(this.user.uid)
+      }
+    }
   }
 }
 </script>
