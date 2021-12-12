@@ -14,7 +14,8 @@ export default {
           uid: task.uid,
           completed: task.completed,
         })
-        .then(() => {
+        .then((doc) => {
+          task.id = doc.id
           state.tasks.unshift(task)
         })
         .catch(error => {
@@ -39,7 +40,6 @@ export default {
         })
     },
     completeTask (state, id) {
-      console.log(id)
       firebase.firestore().collection('tasks').doc(id)
         .update({ completed: true })
         .then(() => {
