@@ -36,7 +36,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions('user', ['USER'])
+    ...mapActions('user', ['SET_USER'])
   }
 };
 </script>
