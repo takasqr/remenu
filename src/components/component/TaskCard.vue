@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="xl">
+  <v-card rounded="xl" @click="goToTaskDetail()">
     <v-list dense>
       <v-list-item-group>
         <v-list-item>
@@ -35,7 +35,9 @@ export default {
     ...mapActions('tasks', ['COMPLETE_TASK']),
     completeTask: function () {
       this.COMPLETE_TASK(this.task.id)
-      
+    },
+    goToTaskDetail: function() {
+      this.$router.push({ path: `task/${this.task.id}` })
     }
   }
 }
