@@ -29,6 +29,11 @@ const routes = [
         path: '/setting',
         name: 'SettingPage',
         component: () => import(/* webpackChunkName: "main" */ '../components/page/SettingPage.vue')
+      },
+      {
+        path: '/task/:taskId',
+        name: 'TaskDetailPage',
+        component: () => import(/* webpackChunkName: "main" */ '../components/page/TaskDetailPage.vue')
       }
     ]
   }
