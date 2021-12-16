@@ -4,7 +4,7 @@
       <v-list-item-group>
         <v-list-item>
           <v-list-item-action>
-            <v-btn color="white" elevation="0" @click="completeTask()">
+            <v-btn color="white" elevation="0" @click.stop="completeTask()">
               <CompletedButton />
             </v-btn>
           </v-list-item-action>

@@ -16,6 +16,11 @@ export default {
   components: {
     TaskCard
   },
+  created: function () {
+    if (this.user && (this.tasks.lenght === 0)) {
+      this.FETCH_TASKS(this.user.uid)
+    }
+  },
   computed: {
     ...mapState('tasks',
       { tasks: state => state.tasks }
