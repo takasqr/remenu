@@ -36,7 +36,10 @@ export default {
           .get()
           .then(doc => {
             this.task = doc.data()
-        })
+          })
+          .catch(error => {
+            console.error(error)
+          })
       }
     }
   }
