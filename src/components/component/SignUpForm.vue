@@ -4,8 +4,8 @@
     v-model="valid"
     lazy-validation
   >
-    <InputEmailAddress v-model="emailAddress" />
-    <InputPassword v-model="password" />
+    <InputEmailAddress v-bind:emailAddress.sync="emailAddress" />
+    <InputPassword v-bind:password.sync="password" />
     <v-btn block :disabled="!valid" x-large @click="SignUp">{{ $t('message.signup_button') }}</v-btn>
   </v-form>
 </template>

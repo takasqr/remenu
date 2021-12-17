@@ -1,31 +1,25 @@
 <template>
   <v-text-field
     outlined
-    v-model="emailAddress"
     :rules="emailAddressRules"
     :label="this.$t('message.input_emailAddress')"
     required
     :value="emailAddress"
-    @change="sendData"
+    @input="sendData"
   >
   </v-text-field>
 </template>
 
 <script>
 export default {
-  model: {
-    prop: 'emailAddressProp',
-    event: 'inputField'
-  },
   props: {
-    emailAddressProp: {
+    emailAddress: {
       type: String,
       default: ''
     }
   },
   data () {
     return {
-      emailAddress: this.emailAddressProp,
       emailAddressRules: [
         v => !!v || this.$t('message.input_error_require'),
         v => (v && v.length <= 100) || this.$t('message.input_error_count', { num: '100' }),
@@ -35,14 +29,7 @@ export default {
   },
   methods: {
     sendData: function (e) {
-      this.$emit('inputField', e)
-    }
-  },
-  watch: {
-    emailAddressProp: {
-      handler: function (newValue) {
-        this.emailAddress = newValue
-      }
+      this.$emit('update:emailAddress', e)
     }
   }
 }
