@@ -34,6 +34,11 @@ const routes = [
         path: '/task/:taskId',
         name: 'TaskDetailPage',
         component: () => import(/* webpackChunkName: "main" */ '../components/page/TaskDetailPage.vue')
+      },
+      {
+        path: '/habit',
+        name: 'HabitPage',
+        component: () => import(/* webpackChunkName: "main" */ '../components/page/HabitPage.vue')
       }
     ]
   }
