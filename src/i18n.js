@@ -11,6 +11,7 @@ export default new VueI18n({
     'en-US': {
       message: {
         home: 'Home',
+        habit: 'Habit',
         setting: 'Setting',
         signup_title: 'Remenu',
         signup_sub: 'New Account',
@@ -36,6 +37,7 @@ export default new VueI18n({
     'ja-JP': {
       message: {
         home: 'ホーム',
+        habit: '習慣',
         setting: '設定',
         signup_title: 'Remenu',
         signup_sub: '新規登録',
