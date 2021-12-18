@@ -52,6 +52,7 @@ export default {
     items () {
       return [
         { title: this.$t('message.home'), icon: 'mdi-home', link: '/home' },
+        { title: this.$t('message.habit'), icon: 'mdi-home', link: '/habit' },
         { title: this.$t('message.setting'), icon: 'mdi-account-circle-outline', link: '/setting' },
         { divider: true },
         { title: 'LOGOUT', icon: 'mdi-exit-to-app', action: () => this.signOut() }

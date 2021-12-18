@@ -52,13 +52,13 @@ export default {
     }
   },
   actions: {
-    CREATE_TASK ({ commit }, value) {
+    CREATE_HABIT ({ commit }, value) {
       commit('createHabit', value)
     },
-    FETCH_TASKS ({ commit }, value) {
+    FETCH_HABITS ({ commit }, value) {
       commit('fetchHabits', value)
     },
-    COMPLETE_TASK ({ commit }, value) {
+    COMPLETE_HABIT ({ commit }, value) {
       commit('completeHabit', value)
     }
   }

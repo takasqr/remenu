@@ -39,6 +39,11 @@ const routes = [
         path: '/habit',
         name: 'HabitPage',
         component: () => import(/* webpackChunkName: "main" */ '../components/page/HabitPage.vue')
+      },
+      {
+        path: '/habit/:habitId',
+        name: 'HabitDetailPage',
+        component: () => import(/* webpackChunkName: "main" */ '../components/page/HabitDetailPage.vue')
       }
     ]
   }

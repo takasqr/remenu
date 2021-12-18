@@ -1,41 +1,41 @@
 <template>
   <div>
-    <TaskCard
-      v-for="(task, index) in tasks"
+    <HabitCard
+      v-for="(habit, index) in habits"
       :key="index"
-      :task="task"
+      :habit="habit"
     />
   </div>
 </template>
 
 <script>
-import TaskCard from '@/components/component/TaskCard.vue'
+import HabitCard from '@/components/component/HabitCard.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
-    TaskCard
+    HabitCard
   },
   created: function () {
-    if (this.user && (Object.keys(this.tasks).length === 0)) {
-      this.FETCH_TASKS(this.user.uid)
+    if (this.user && (Object.keys(this.habits).length === 0)) {
+      this.FETCH_HABITS(this.user.uid)
     }
   },
   computed: {
-    ...mapState('tasks',
-      { tasks: state => state.tasks }
+    ...mapState('habits',
+      { habits: state => state.habits }
     ),
     ...mapState('user',
       { user: state => state.user }
     )
   },
   methods: {
-    ...mapActions('tasks', ['FETCH_TASKS'])
+    ...mapActions('habits', ['FETCH_HABITS'])
   },
   watch: {
     user (newValue, oldValue) {
       if (newValue && !oldValue) {
-        this.FETCH_TASKS(this.user.uid)
+        this.FETCH_HABITS(this.user.uid)
       }
     }
   }
