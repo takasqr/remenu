@@ -8,19 +8,32 @@ export default {
   },
   mutations: {
     createHabit (state, habit) {
-      firebase.firestore().collection('habits')
-        .add({
+      let batch = firebase.firestore().batch()
+      // habit追加
+      let newHabitRef = firebase.firestore().collection('habits').doc()
+      batch.set(newHabitRef, {
           name: habit.name,
           uid: habit.uid,
           completed: habit.completed,
         })
-        .then((doc) => {
-          habit.id = doc.id
+
+      // task追加
+      let newTaskRef = firebase.firestore().collection('tasks').doc()
+      batch.set(newTaskRef, {
+          name: habit.name,
+          uid: habit.uid,
+          habitId: newHabitRef.id,
+          completed: habit.completed
+        })
+
+      batch.commit().then(() => {
+          habit.id = newHabitRef.id
           state.habits.unshift(habit)
         })
         .catch(error => {
           console.error(error)
         })
+
     },
     fetchHabits (state, uid) {
       firebase.firestore().collection('habits')

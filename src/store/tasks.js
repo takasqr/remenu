@@ -12,6 +12,7 @@ export default {
         .add({
           name: task.name,
           uid: task.uid,
+          habitId: '',
           completed: task.completed,
         })
         .then((doc) => {
@@ -39,15 +40,35 @@ export default {
           console.error(error)
         })
     },
-    completeTask (state, id) {
-      firebase.firestore().collection('tasks').doc(id)
-        .update({ completed: true })
+    completeTask (state, task) {
+      // バッチ処理作成
+      let batch = firebase.firestore().batch()
+
+      // 終了させるタスク
+      let completedTaskRef = firebase.firestore().collection('tasks').doc(task.id)
+      batch.update(completedTaskRef, { completed: true })
+
+      // 習慣の再追加
+      let newTaskRef
+      if (task.habitId) {
+        newTaskRef = firebase.firestore().collection('tasks').doc()
+
+        batch.set(newTaskRef, {
+            name: task.name,
+            uid: task.uid,
+            habitId: task.habitId,
+            completed: task.completed,
+          })
+      }
+      batch.commit()
         .then(() => {
-          const index = state.tasks.findIndex(el => el.id === id)
+          const index = state.tasks.findIndex(el => el.id === task.id)
           state.tasks.splice(index, 1)
-        })
-        .catch(error => {
-          console.error(error)
+
+          if (task.habitId) {
+            task.id = newTaskRef.id
+            state.tasks.unshift(task)
+          }
         })
     }
   },

@@ -34,7 +34,7 @@ export default {
   methods: {
     ...mapActions('tasks', ['COMPLETE_TASK']),
     completeTask: function () {
-      this.COMPLETE_TASK(this.task.id)
+      this.COMPLETE_TASK(this.task)
     },
     goToTaskDetail: function() {
       this.$router.push({ path: `task/${this.task.id}` })
