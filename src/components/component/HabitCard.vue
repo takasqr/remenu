@@ -32,9 +32,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('habits', ['COMPLETE_HABIT']),
+    ...mapActions('habits', ['DELETE_HABIT']),
     completeHabit: function () {
-      this.COMPLETE_HABIT(this.habit.id)
+      this.DELETE_HABIT(this.habit)
     },
     goToHabitDetail: function() {
       this.$router.push({ path: `habit/${this.habit.id}` })

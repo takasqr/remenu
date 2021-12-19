@@ -45,7 +45,7 @@ export default {
     createTask (e) {
       e.preventDefault()
 
-      this.CREATE_HABIT({ uid: this.user.uid ,name: this.habitName, completed: false })
+      this.CREATE_HABIT({ uid: this.user.uid ,name: this.habitName, deleted: false })
 
       // 入力をクリア
       this.habitName = null

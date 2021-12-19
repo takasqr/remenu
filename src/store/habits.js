@@ -14,7 +14,7 @@ export default {
       batch.set(newHabitRef, {
           name: habit.name,
           uid: habit.uid,
-          completed: habit.completed,
+          deleted: habit.deleted,
         })
 
       // task追加
@@ -23,7 +23,7 @@ export default {
           name: habit.name,
           uid: habit.uid,
           habitId: newHabitRef.id,
-          completed: habit.completed
+          completed: false
         })
 
       batch.commit().then(() => {
@@ -38,7 +38,7 @@ export default {
     fetchHabits (state, uid) {
       firebase.firestore().collection('habits')
         .where('uid', '==', uid)
-        .where('completed', '==', false)
+        .where('deleted', '==', false)
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
@@ -52,11 +52,30 @@ export default {
           console.error(error)
         })
     },
-    completeHabit (state, id) {
-      firebase.firestore().collection('habits').doc(id)
-        .update({ completed: true })
+    async deleteHabit (state, habit) {
+      let batch = firebase.firestore().batch()
+
+      let deletdedHabitRef = firebase.firestore().collection('habits').doc(habit.id)
+      batch.update(deletdedHabitRef, { deleted: true })
+
+      await firebase.firestore()
+        .collection('tasks')
+        .where('habitId', '==', habit.id)
+        .where('uid', '==', habit.uid)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let taskRef = firebase.firestore().collection('tasks').doc(doc.id)
+            batch.update(taskRef, { habitId: '' })
+          })
+        })
+        .catch(error => {
+          console.error(error)
+        })
+      
+      batch.commit()
         .then(() => {
-          const index = state.habits.findIndex(el => el.id === id)
+          const index = state.habits.findIndex(el => el.id === habit.id)
           state.habits.splice(index, 1)
         })
         .catch(error => {
@@ -73,6 +92,9 @@ export default {
     },
     COMPLETE_HABIT ({ commit }, value) {
       commit('completeHabit', value)
+    },
+    DELETE_HABIT ({ commit }, value) {
+      commit('deleteHabit', value)
     }
   }
 }
