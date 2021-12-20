@@ -17,7 +17,8 @@ export default {
     TaskCard
   },
   created: function () {
-    if (this.user && (Object.keys(this.tasks).length === 0)) {
+    // if (this.user && (Object.keys(this.tasks).length === 0)) {
+    if (this.user) {
       this.FETCH_TASKS(this.user.uid)
     }
   },

@@ -24,6 +24,7 @@ export default {
         })
     },
     fetchTasks (state, uid) {
+      state.tasks = []
       firebase.firestore().collection('tasks')
         .where('uid', '==', uid)
         .where('completed', '==', false)
@@ -67,7 +68,11 @@ export default {
 
           if (task.habitId) {
             task.id = newTaskRef.id
-            state.tasks.unshift(task)
+            newTaskRef.get().then(doc => {
+              let newTask = doc.data()
+              newTask.id = doc.id
+              state.tasks.unshift(newTask)
+            })
           }
         })
     }
