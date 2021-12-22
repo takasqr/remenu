@@ -58,7 +58,7 @@ export default {
             name: task.name,
             uid: task.uid,
             habitId: task.habitId,
-            completed: task.completed,
+            completed: task.completed
           })
       }
       batch.commit()
