@@ -5,7 +5,7 @@
         ref="form"
         v-model="valid"
         lazy-validation
-        @submit="createTask"
+        @submit.prevent="createTask"
       >
         <v-text-field
           v-model="habitName"
@@ -40,9 +40,7 @@ export default {
   },
   methods: {
     ...mapActions('habits', ['CREATE_HABIT']),
-    createTask (e) {
-      e.preventDefault()
-
+    createTask () {
       this.CREATE_HABIT({ uid: this.user.uid ,name: this.habitName, deleted: false })
 
       // 入力をクリア
