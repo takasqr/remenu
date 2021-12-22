@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <v-card rounded="lg">
-      <v-card-text>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-          @submit="createTask"
-        >
-          <v-text-field
-            v-model="habitName"
-            :rules="habitNameRules"
-            :label="this.$t('message.input_new_habit')"
-            required
-            validate-on-blur
-            clearable
-          />
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </div>
+  <v-card rounded="lg">
+    <v-card-text>
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+        @submit="createTask"
+      >
+        <v-text-field
+          v-model="habitName"
+          :rules="habitNameRules"
+          :label="this.$t('message.input_new_habit')"
+          required
+          validate-on-blur
+          clearable
+        />
+      </v-form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
