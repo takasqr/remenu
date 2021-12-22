@@ -3,10 +3,11 @@
     ref="form"
     v-model="valid"
     lazy-validation
+    @submit.prevent="SignIn"
   >
     <InputEmailAddress v-bind:emailAddress.sync="emailAddress" />
     <InputPassword v-bind:password.sync="password" />
-    <v-btn block :disabled="!valid" x-large @click="SignIn">{{ $t('message.signin_button') }}</v-btn>
+    <v-btn block :disabled="!valid" x-large>{{ $t('message.signin_button') }}</v-btn>
   </v-form>
 </template>
 
