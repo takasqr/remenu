@@ -7,7 +7,7 @@
   >
     <InputEmailAddress v-bind:emailAddress.sync="emailAddress" />
     <InputPassword v-bind:password.sync="password" />
-    <v-btn block :disabled="!valid" x-large>{{ $t('message.signin_button') }}</v-btn>
+    <v-btn type="submit" block :disabled="!valid" x-large>{{ $t('message.signin_button') }}</v-btn>
   </v-form>
 </template>
 
