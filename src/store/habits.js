@@ -36,6 +36,7 @@ export default {
 
     },
     fetchHabits (state, uid) {
+      state.habits = []
       firebase.firestore().collection('habits')
         .where('uid', '==', uid)
         .where('deleted', '==', false)
