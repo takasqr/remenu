@@ -17,7 +17,7 @@ export default {
     HabitCard
   },
   created: function () {
-    if (this.user && (Object.keys(this.habits).length === 0)) {
+    if (this.user) {
       this.FETCH_HABITS(this.user.uid)
     }
   },
