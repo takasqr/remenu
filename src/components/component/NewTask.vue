@@ -7,14 +7,14 @@
         lazy-validation
         @submit.prevent="createTask"
       >
-        <TaskName v-bind:taskName.sync="taskName"></TaskName>
+        <InputTaskName v-bind:taskName.sync="taskName"></InputTaskName>
       </v-form>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import TaskName from '@/components/basic/TaskName.vue'
+import InputTaskName from '@/components/basic/InputTaskName.vue'
 import { mapState, mapActions } from 'vuex'
 export default {
   data () {
@@ -24,7 +24,7 @@ export default {
     }
   },
   components: {
-    TaskName
+    InputTaskName
   },
   computed: {
     ...mapState('user',
