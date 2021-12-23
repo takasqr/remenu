@@ -41,6 +41,27 @@ export default {
           console.error(error)
         })
     },
+    updateTask (state, task) {
+      // バッチ処理作成
+      let batch = firebase.firestore().batch()
+
+      // 更新するタスク
+      let updatedTaskRef = firebase.firestore().collection('tasks').doc(task.id)
+      batch.update(updatedTaskRef, task)
+
+      // 習慣だったら
+      let updatedHabitRef
+      if (task.habitId) {
+        updatedHabitRef= firebase.firestore().collection('habits').doc(task.habitId)
+
+        batch.update(updatedHabitRef, { uid: task.uid, name: task.name })
+      }
+      // バッチ処理実行
+      batch.commit()
+        .catch(error => {
+          console.error(error)
+        })
+    },
     completeTask (state, task) {
       // バッチ処理作成
       let batch = firebase.firestore().batch()
@@ -83,6 +104,9 @@ export default {
     },
     FETCH_TASKS ({ commit }, value) {
       commit('fetchTasks', value)
+    },
+    UPDATE_TASK ({ commit }, value) {
+      commit('updateTask', value)
     },
     COMPLETE_TASK ({ commit }, value) {
       commit('completeTask', value)

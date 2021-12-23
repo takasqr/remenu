@@ -11,6 +11,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import TaskViewer from '@/components/component/TaskViewer'
 import TaskEditor from '@/components/component/TaskEditor'
+import { mapActions } from 'vuex'
 export default {
   components: {
     TaskViewer,
@@ -30,9 +31,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions('tasks', ['UPDATE_TASK']),
     clickEditSwitch: function () {
       if (this.editSwitch) {
         this.editSwitch = false
+        this.UPDATE_TASK(this.task)
       } else {
         this.editSwitch = true
       }
@@ -43,7 +46,9 @@ export default {
         .doc(taskId)
         .get()
         .then(doc => {
-          this.task = doc.data()
+          let task = doc.data()
+          task.id = doc.id
+          this.task = task
         })
         .catch(error => {
           console.error(error)
