@@ -11,6 +11,7 @@ export default {
       firebase.firestore().collection('tasks')
         .add({
           name: task.name,
+          timeRequired: task.timeRequired,
           uid: task.uid,
           habitId: '',
           completed: task.completed,
@@ -54,7 +55,7 @@ export default {
       if (task.habitId) {
         updatedHabitRef= firebase.firestore().collection('habits').doc(task.habitId)
 
-        batch.update(updatedHabitRef, { uid: task.uid, name: task.name })
+        batch.update(updatedHabitRef, { uid: task.uid, name: task.name, timeRequired: task.timeRequired, })
       }
       // バッチ処理実行
       batch.commit()
@@ -78,6 +79,7 @@ export default {
         batch.set(newTaskRef, {
             name: task.name,
             uid: task.uid,
+            timeRequired: task.timeRequired,
             habitId: task.habitId,
             completed: task.completed
           })

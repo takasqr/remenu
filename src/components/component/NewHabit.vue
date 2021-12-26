@@ -41,7 +41,7 @@ export default {
   methods: {
     ...mapActions('habits', ['CREATE_HABIT']),
     createTask () {
-      this.CREATE_HABIT({ uid: this.user.uid ,name: this.habitName, deleted: false })
+      this.CREATE_HABIT({ uid: this.user.uid ,name: this.habitName, timeRequired: 0, deleted: false })
 
       // 入力をクリア
       this.habitName = null

@@ -13,6 +13,7 @@ export default {
       let newHabitRef = firebase.firestore().collection('habits').doc()
       batch.set(newHabitRef, {
           name: habit.name,
+          timeRequired: habit.timeRequired,
           uid: habit.uid,
           deleted: habit.deleted,
         })
@@ -21,6 +22,7 @@ export default {
       let newTaskRef = firebase.firestore().collection('tasks').doc()
       batch.set(newTaskRef, {
           name: habit.name,
+          timeRequired: habit.timeRequired,
           uid: habit.uid,
           habitId: newHabitRef.id,
           completed: false

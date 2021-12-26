@@ -34,7 +34,7 @@ export default {
   methods: {
     ...mapActions('tasks', ['CREATE_TASK']),
     createTask () {
-      this.CREATE_TASK({ uid: this.user.uid ,name: this.taskName, completed: false })
+      this.CREATE_TASK({ uid: this.user.uid ,name: this.taskName, timeRequired: 0, completed: false })
 
       // 入力をクリア
       this.taskName = null
